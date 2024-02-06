@@ -58,10 +58,36 @@ Following the analysis of logs from a typical day, VSI experiences several secur
 As a SOC analyst, these logs must be interpreted to determine which data fields are most important to monitor. A quick analysis of the logs reveals the important fields to examine are the following:
 - signature_id
 - signature
-- user
-- status
 - severity
+- status
+- user
 
-To begin it is critical to be able to identify signatures and associate them with the corresponding signature ID as a resource to refer to.
-(Screenshots/Windows_Typical_Logs/Win_Report_Signature_ID_Name)
+The logs contain a large amount of data to analyze. To be able to parse through all the data Splunk's Search Processing Language (SPL) will be utilized to manipulate the data.
+
+For the following queries make sure to save the search as a report.
+   1. Click the "Save As" button
+   2. Navigate through the dropdown menu and click "Report"
+   3. Enter a descriptive title for the report
+   4. Save the report
+
+To begin, it is critical to be able to identify signatures and associate them with the corresponding signature ID as a resource to refer to.
+
+The following SPL query will accomplish the signature and signature ID association:
+```
+source="windows_server_logs.csv" host="Windows_server_logs" sourcetype="csv" signature="*" signature_id="*" | dedup signature, signature_id | table signature,
+signature_id
+```
+
+![Screenshot of Signature ID table](Screenshots/Windows_Typical_Logs/Win_Report_Signature_ID_Name.png)
+
+Understanding the severity of the Windows logs is important to monitor the health of the servers.
+
+The following SPL will display the severity levels, the count of events, and percentage:
+```
+source="windows_server_logs.csv" host="Windows_server_logs" sourcetype="csv" severity="*" | stats count by severity | eventstats sum(count) as total | eval percentage=round((count/total)*100,2). "%" | table severity, count, percentage
+```
+
+![Screenshot of Severity table](Screenshots/Windows_Typical_Logs/Win_Report_Severity_Levels.png)
+
+
 
