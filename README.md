@@ -55,4 +55,13 @@ Following the analysis of logs from a typical day, VSI experiences several secur
 
 ### Developing Monitoring Solution
 
-As a SOC analyst, these logs must be interpreted to determine which data fields are most important to monitor. 
+As a SOC analyst, these logs must be interpreted to determine which data fields are most important to monitor. A quick analysis of the logs reveals the important fields to examine are the following:
+- signature_id
+- signature
+- user
+- status
+- severity
+
+To begin it is critical to be able to identify signatures and associate them with the corresponding signature ID as a resource to refer to.
+(Screenshots/Windows_Typical_Logs/Win_Report_Signature_ID_Name)
+
