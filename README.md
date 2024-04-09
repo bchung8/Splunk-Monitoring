@@ -133,7 +133,7 @@ For the following queries, make sure to save the search as an Alert.
       - Webhook: generic HTTP POST to a specified url
    10. Save the report
 
-A useful alert would be monitoring the number of failed Windows activities that occur over time. Getting this data from the logs would be important to establish a baseline of failed Windows activities on a typical day.
+A useful alert would be monitoring the number of failed Windows activities that occur over time. Getting this data from the logs would be important to establish a baseline for failed Windows activities on a typical day.
 
 The following SPL will display the number of failed Windows activities over time in 1-hour intervals:
 ```
@@ -145,3 +145,21 @@ source="windows_server_logs.csv" host="Windows_server_logs" sourcetype="csv" sta
 By analyzing the time chart, a typical baseline average of 7 failed Windows events can be assumed, and a typical max of 10 Windows events. This data can be used to create an alert that is set to run hourly and triggered to send an email to the SOC analyst when there are more than 10 failed Window events.
 
 ![Screenshot of failed windows alert](Screenshots/Windows_Typical_Logs/Win_Alert_Failed_Activity.png)
+
+### Developing Dashboard Visualizations
+
+Dashboards are a critical visualization tool in Splunk. This powerful functionality allows users to generate visual representations of SPL queries and can allow users to put them in context for ease of understanding.
+
+For the following queries, make sure to save the search as a dashboard visualization.
+   1. Select "Visualization"
+   2. Select the most appropriate visualization for the query
+      - Line graph, column chart, pie chart, etc.
+   3. Click the "Save As" button
+   4. Navigate through the dropdown menu and click "Dashboard Panel"
+   5. You can then choose to create a new dashboard or add the panel to an existing dashboard.
+   6. Enter the title for the new dashboard panel.
+   7. Enter a brief description explaining the dashboard panel
+   8. Set dashboard permissions.
+      -"Private" or "Shared in App"
+   9. Enter the Panel Title that will appear on the dashboard.
+   10. Hit "Save" 
